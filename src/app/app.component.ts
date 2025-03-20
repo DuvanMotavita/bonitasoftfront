@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AnalizarMuestrasService } from './services/analizar-muestras.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,18 @@ export class AppComponent implements OnInit {
   private serviceAnalizar: AnalizarMuestrasService = inject(
     AnalizarMuestrasService
   );
+  private documentCookie:string = '';
+  private taskId:string = '';
   public principalTitle: string = '';
   title = 'bonitasoft';
   ngOnInit(): void {
-    this.serviceAnalizar.getTaskId().subscribe((res: any) => {
-      this.principalTitle = res.id;
+    this.serviceAnalizar.getToken().pipe(take(1)).subscribe({
+      next: (resp) => {    this.documentCookie = document.cookie.split(';')[1];       },
+      error: (error) => console.log(error)
     });
+
+    this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id});
+
   }
 
   buttonClic(): void {
@@ -29,7 +36,7 @@ export class AppComponent implements OnInit {
         consistencia: 'Liquida',
       },
     };
-    this.serviceAnalizar.addAnalisis(data).subscribe((res: any) => {
+    this.serviceAnalizar.addAnalisis(data,this.documentCookie,this.taskId).subscribe((res: any) => {
       console.log(res);
     });
   }
