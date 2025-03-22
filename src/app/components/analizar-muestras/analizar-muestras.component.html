@@ -1,0 +1,22 @@
+<h1>{{ principalTitle }}</h1>
+
+<form [formGroup]="analisisForm" (ngSubmit)="submitAnalisis()">
+         <mat-form-field>
+            <mat-label>Id</mat-label>
+            <input id="id" type="text" formControlName="id" matInput>
+          </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nombre Muestra</mat-label>
+                <input id="nombreMuestra" type="text" formControlName="nombreMuestra" matInput>
+              </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Consistencia</mat-label>
+                <input id="consistencia" type="text" formControlName="consistencia" matInput>
+              </mat-form-field>
+              <button type="submit" mat-fab extended>
+                <mat-icon>send</mat-icon>
+                Enviar
+              </button>
+</form>

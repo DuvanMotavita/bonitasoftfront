@@ -9,8 +9,7 @@ export class AnalizarMuestrasService {
   private http: HttpClient = inject(HttpClient);
   constructor() {}
 
-  public addAnalisis(data: any,token:string,taskId:string): Observable<any> {
-    token =  token.split("=")[1]
+  public processExecution(data: any,token:string,taskId:string): Observable<any> {
     return this.http.post<any>(
       `/bonita/API/bpm/userTask/${taskId}/execution`,
       data,

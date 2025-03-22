@@ -1,0 +1,30 @@
+<h1>{{ principalTitle }}</h1>
+
+<form [formGroup]="examenesForm" (ngSubmit)="submitExamenes()">
+         <mat-form-field>
+            <mat-label>Id</mat-label>
+            <input id="id" type="text" formControlName="id" matInput [value]="examenesForm.value.id">
+          </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nombre Muestra</mat-label>
+                <input id="nombreMuestra" type="text" formControlName="nombreMuestra" matInput [value]="examenesForm.value.nombreMuestra">
+              </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Consistencia</mat-label>
+                <input id="consistencia" type="text" formControlName="consistencia" matInput [value]="examenesForm.value.consistencia">
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>Nombre Procedimiento</mat-label>
+                <input id="nombreProcedimiento" type="text" formControlName="nombreProcedimiento" matInput>
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>Resultados</mat-label>
+                <input id="resultados" type="text" formControlName="resultados" matInput>
+              </mat-form-field>
+              <button type="submit" mat-fab extended>
+                <mat-icon>send</mat-icon>
+                Enviar
+              </button>
+</form>
