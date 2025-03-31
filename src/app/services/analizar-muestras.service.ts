@@ -29,6 +29,6 @@ export class AnalizarMuestrasService {
     });
   }
   public getToken(): Observable<any> {
-    return this.http.get<any>(`/bonita/loginservice?username=Laboratorista&redirect=false&password=bpm`);
+    return this.http.post<any>(`/bonita/loginservice?username=Laboratorista&redirect=false&password=bpm`,null);
   }
 }
