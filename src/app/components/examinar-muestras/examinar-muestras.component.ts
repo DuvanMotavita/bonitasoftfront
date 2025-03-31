@@ -52,6 +52,9 @@ export default class ExaminarMuestrasComponent implements OnInit {
           nombreProcedimiento: this.examenesForm.value.nombreProcedimiento  ,
           resultados: this.examenesForm.value.resultados
         },
+        historiaClinicaInput:{
+          strResultadosLab: this.examenesForm.value.resultados
+        }
       };
       this.serviceAnalizar.processExecution(data,this.documentCookie,this.taskId).subscribe((res: any) => {
               Swal.fire({
