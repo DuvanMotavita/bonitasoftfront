@@ -26,7 +26,7 @@ export default class AnalizarMuestrasComponent implements OnInit {
   );
   private documentCookie:string = '';
   private taskId:string = '';
-  
+
   public principalTitle: string = 'Analisis de la muestra';
 
   public analisisForm = new FormGroup({
@@ -39,15 +39,27 @@ export default class AnalizarMuestrasComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceAnalizar.getToken().pipe(take(1)).subscribe({
-      next: (resp) => {    
+      next: (resp) => {
+        console.log("Service response success");
+       },
+      error: (error) => console.log(error),
+      complete: () => {
         this.documentCookie = document.cookie.split(';')[1];
         this.documentCookie = this.documentCookie.split('=')[1];
-        this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id});   
-       },
-      error: (error) => console.log(error)
+        this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{
+          resp.forEach((element: any) => {
+            element.name = element.name.toLowerCase();
+            if(element.name.includes('examen')  ){
+              this.taskId = element.id;
+            }
+          });
+
+        });
+
+      },
     });
 
-    
+
 
   }
 

@@ -22,7 +22,7 @@ export class AnalizarMuestrasService {
   }
 
   public getTaskId(token:string): Observable<any> {
-    return this.http.get<any>(`/bonita/API/bpm/task?p=0&c=1`, {
+    return this.http.get<any>(`/bonita/API/bpm/task?p=0&c=10`, {
       headers: {
         'X-Bonita-API-Token': token,
       },
