@@ -22,4 +22,11 @@ export class ExaminarMuestrasService {
         },
       });
     }
+    public getDataStorageDataHistoria(token:string,storageId:string): Observable<any> {
+      return this.http.get<any>(`/bonita/portal/resource/taskInstance/Laboratorio/1.0/Registrar%20Examen/API/bdm/businessData/com.company.model.HistoriaClinica/${storageId}`, {
+        headers: {
+          'X-Bonita-API-Token': token,
+        },
+      });
+    }
 }

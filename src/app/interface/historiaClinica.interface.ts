@@ -1,0 +1,36 @@
+export interface Hitoriaclinica {
+  persistenceId:             number;
+  persistenceId_string:      string;
+  persistenceVersion:        number;
+  persistenceVersion_string: string;
+  strTipoDocumento:          string;
+  intNumeroDocumento:        number;
+  strNombreApellido:         string;
+  strEmail:                  string;
+  intCelular:                number;
+  strPrestadorSalud:         string;
+  strTipoDocAcomp:           null;
+  intNumDocAcomp:            null;
+  strNombreAcomp:            null;
+  intCelularAcomp:           null;
+  dtFechaIngreso:            Date;
+  strMotivoConsulta:         string;
+  intTriage:                 number;
+  strSignosVitales:          string;
+  intEdad:                   number;
+  strEvaluacionMedica:       null;
+  bLaboratorios:             boolean;
+  strExamenSolicitado:       string;
+  strResultadosLab:          null;
+  bImagenesDx:               boolean;
+  strImagenesDx:             string;
+  strResultadosDx:           null;
+  strDiagnostico:            null;
+  bCirugia:                  boolean;
+  dtFechaCirugia:            null;
+  strTratamiento:            null;
+  strResultadoCirugia:       null;
+  bAsegCobertura:            boolean;
+  bAsegAutorizaCirugia:      boolean;
+  bDiagnostico:              null;
+}

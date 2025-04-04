@@ -9,6 +9,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import Swal from 'sweetalert2'
+import { Hitoriaclinica } from '../../interface/historiaClinica.interface';
+import { ExaminarMuestrasService } from '../../services/examinar-muestras.service';
 
 
 @Component({
@@ -24,9 +26,12 @@ export default class AnalizarMuestrasComponent implements OnInit {
   private serviceAnalizar: AnalizarMuestrasService = inject(
     AnalizarMuestrasService
   );
+     private serviceExaminar: ExaminarMuestrasService = inject(
+      ExaminarMuestrasService
+      );
   private documentCookie:string = '';
   private taskId:string = '';
-
+  public historiaClinica:Hitoriaclinica | undefined;
   public principalTitle: string = 'Analisis de la muestra';
 
   public analisisForm = new FormGroup({
@@ -52,7 +57,9 @@ export default class AnalizarMuestrasComponent implements OnInit {
             if(element.name.includes('examen')  ){
               this.taskId = element.id;
             }
-          });
+          });0
+          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id; this.getDataProcess(); });
+
 
         });
 
@@ -80,6 +87,16 @@ export default class AnalizarMuestrasComponent implements OnInit {
       });
     });
   }
+
+
+  getDataProcess():void{
+    this.serviceExaminar.getDataBaseRegister(this.documentCookie,this.taskId).pipe(take(1)).subscribe((response)=>{
+       this.serviceAnalizar.getDataStorageDataHistoria(this.documentCookie, response.historiaClinica_ref.storageId).pipe(take(1)).subscribe((data)=>{
+        this.historiaClinica = data;
+       });
+    })
+  }
+
 
 
 }

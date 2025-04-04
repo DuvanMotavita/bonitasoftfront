@@ -10,6 +10,7 @@ import { AnalizarMuestrasService } from '../../services/analizar-muestras.servic
 import { take } from 'rxjs';
 import { ExaminarMuestrasService } from '../../services/examinar-muestras.service';
 import Swal from 'sweetalert2';
+import { Hitoriaclinica } from '../../interface/historiaClinica.interface';
 
 
 @Component({
@@ -29,9 +30,9 @@ export default class ExaminarMuestrasComponent implements OnInit {
     );
     private documentCookie:string = '';
     private taskId:string = '';
-    
+    public historiaClinica:Hitoriaclinica | undefined;
     public principalTitle: string = 'Examenes de la muestra';
-  
+
     public examenesForm = new FormGroup({
       id: new FormControl({value:'',disabled:true}),
       nombreMuestra: new FormControl({value:'',disabled:true}),
@@ -39,13 +40,13 @@ export default class ExaminarMuestrasComponent implements OnInit {
       nombreProcedimiento: new FormControl(''),
       resultados: new FormControl('')
     });
-  
+
     title = 'bonitasoft';
-  
+
     ngOnInit(): void {
       this.loginProcess();
     }
-  
+
     submitExamenes(): void {
       const data = {
         examinarMuestrasInput: {
@@ -65,14 +66,14 @@ export default class ExaminarMuestrasComponent implements OnInit {
               });
       });
     }
-    
+
     loginProcess() : void{
       this.serviceAnalizar.getToken().pipe(take(1)).subscribe({
-        next: (resp) => {    
+        next: (resp) => {
           this.documentCookie = document.cookie.split(';')[1];
           this.documentCookie = this.documentCookie.split('=')[1];
-          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id; this.getDataProcess(); }); 
-           
+          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id; this.getDataProcess(); });
+
          },
         error: (error) => console.log(error)
       });
@@ -80,14 +81,14 @@ export default class ExaminarMuestrasComponent implements OnInit {
     getDataProcess():void{
       this.serviceExaminar.getDataBaseRegister(this.documentCookie,this.taskId).pipe(take(1)).subscribe((response)=>{
          this.serviceExaminar.getDataStorageData(this.documentCookie, response.examinarMuestras_ref.storageId).pipe(take(1)).subscribe((data)=>{
-          
           this.examenesForm.patchValue({
             id: data.id,
             nombreMuestra: data.nombreMuestra,
             consistencia:  data.consistencia,
           });
-          
-            
+         });
+         this.serviceExaminar.getDataStorageDataHistoria(this.documentCookie, response.historiaClinica_ref.storageId).pipe(take(1)).subscribe((data)=>{
+          this.historiaClinica = data;
          });
       })
     }

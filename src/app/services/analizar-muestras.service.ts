@@ -31,4 +31,12 @@ export class AnalizarMuestrasService {
   public getToken(): Observable<any> {
     return this.http.post<any>(`/bonita/loginservice?username=Laboratorista&redirect=false&password=bpm`,null);
   }
+
+  public getDataStorageDataHistoria(token:string,storageId:string): Observable<any> {
+    return this.http.get<any>(`/bonita/portal/resource/taskInstance/Laboratorio/1.0/Realizar%20Examen/API/bdm/businessData/com.company.model.HistoriaClinica/${storageId}`, {
+      headers: {
+        'X-Bonita-API-Token': token,
+      },
+    });
+  }
 }

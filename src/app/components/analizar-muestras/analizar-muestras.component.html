@@ -1,4 +1,61 @@
 <h1>{{ principalTitle }}</h1>
+<mat-grid-list cols="4" rowHeight="5:1">
+  <mat-grid-tile class="sub-title"><mat-label >Tipo Documento:</mat-label>
+</mat-grid-tile>
+  <mat-grid-tile class="sub-title" >  <mat-label>Numero Documento:</mat-label>
+    </mat-grid-tile>
+  <mat-grid-tile class="sub-title">  <mat-label><mat-label>Nombre Paciente:</mat-label></mat-label>
+    </mat-grid-tile>
+  <mat-grid-tile class="sub-title">  <mat-label>Edad:</mat-label>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-label> {{historiaClinica?.strTipoDocumento}} </mat-label></mat-grid-tile>
+    <mat-grid-tile>
+      <mat-label> {{historiaClinica?.intNumeroDocumento}} </mat-label></mat-grid-tile>
+    <mat-grid-tile>
+      <mat-label>{{historiaClinica?.strNombreApellido}}</mat-label></mat-grid-tile>
+    <mat-grid-tile>
+      <mat-label> {{historiaClinica?.intEdad}} </mat-label></mat-grid-tile>
+
+      <mat-grid-tile class="sub-title"><mat-label >Email Paciente:</mat-label>
+      </mat-grid-tile>
+        <mat-grid-tile class="sub-title">  <mat-label>Celular Paciente:</mat-label>
+          </mat-grid-tile>
+        <mat-grid-tile class="sub-title">  <mat-label>Fecha Ingreso:</mat-label>
+          </mat-grid-tile>
+        <mat-grid-tile class="sub-title">  <mat-label>Motivo Consulta:</mat-label>
+          </mat-grid-tile>
+
+          <mat-grid-tile><mat-label >{{historiaClinica?.strEmail}}</mat-label>
+          </mat-grid-tile>
+            <mat-grid-tile>  <mat-label>{{historiaClinica?.intCelular}}</mat-label>
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label>{{historiaClinica?.strPrestadorSalud}}</mat-label>
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label>{{historiaClinica?.dtFechaIngreso}}</mat-label>
+              </mat-grid-tile>
+
+          <mat-grid-tile class="sub-title"><mat-label >Triage:</mat-label>
+          </mat-grid-tile>
+            <mat-grid-tile >
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label></mat-label>
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label></mat-label>
+              </mat-grid-tile>
+          <mat-grid-tile><mat-label >{{historiaClinica?.intTriage}}</mat-label>
+          </mat-grid-tile>
+            <mat-grid-tile>
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label></mat-label>
+              </mat-grid-tile>
+            <mat-grid-tile>  <mat-label></mat-label>
+              </mat-grid-tile>
+
+</mat-grid-list>
+
+
 
 <form [formGroup]="analisisForm" (ngSubmit)="submitAnalisis()">
          <mat-form-field>
