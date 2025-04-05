@@ -72,7 +72,14 @@ export default class ExaminarMuestrasComponent implements OnInit {
         next: (resp) => {
           this.documentCookie = document.cookie.split(';')[1];
           this.documentCookie = this.documentCookie.split('=')[1];
-          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id; this.getDataProcess(); });
+          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{
+                   resp.forEach((element: any) => {
+            element.name = element.name.toLowerCase();
+            if(element.name.includes('examen')  ){
+              this.taskId = element.id;
+            }
+            this.getDataProcess();
+          });});
 
          },
         error: (error) => console.log(error)

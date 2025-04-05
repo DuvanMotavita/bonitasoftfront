@@ -57,10 +57,8 @@ export default class AnalizarMuestrasComponent implements OnInit {
             if(element.name.includes('examen')  ){
               this.taskId = element.id;
             }
-          });0
-          this.serviceAnalizar.getTaskId(this.documentCookie).pipe(take(1)).subscribe((resp)=>{this.taskId = resp[0].id; this.getDataProcess(); });
-
-
+            this.getDataProcess();
+          });
         });
 
       },
@@ -71,9 +69,10 @@ export default class AnalizarMuestrasComponent implements OnInit {
   }
 
   submitAnalisis(): void {
+
     const data = {
       examinarMuestrasInput: {
-        id: this.analisisForm.value.id,
+        id: this.historiaClinica?.intNumDocAcomp! + Math.floor(Math.random() * 1000),
         nombreMuestra: this.analisisForm.value.nombreMuestra,
         consistencia: this.analisisForm.value.consistencia,
       },
